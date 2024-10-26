@@ -1,5 +1,7 @@
 package com.nicodemus.fiis.DTO;
 
+import com.nicodemus.fiis.entities.Investidor;
+
 public class InvestidorDTO {
 
     private Long id;
@@ -17,6 +19,14 @@ public class InvestidorDTO {
         this.email = email;
         this.telefone = telefone;
         this.corretora = corretora;
+    }
+
+    public InvestidorDTO(Investidor entity) {
+        id = entity.getId();
+        nome = entity.getNome();
+        email = entity.getEmail();
+        telefone = entity.getTelefone();
+        corretora = entity.getCorretora();
     }
 
     public Long getId() {
