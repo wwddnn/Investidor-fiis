@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nicodemus.fiis.DTO.InvestidorDTO;
 import com.nicodemus.fiis.entities.Investidor;
 import com.nicodemus.fiis.repositories.InvestidorRepository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class InvestidorService {
@@ -43,4 +44,17 @@ public class InvestidorService {
         return entity.map(x -> new InvestidorDTO(x));
     }
 
+    @Transactional
+    public InvestidorDTO insert(@RequestBody InvestidorDTO dto) {
+        Investidor entity = new Investidor();
+        entity.setId(dto.getId());
+        entity.setNome(dto.getNome());
+        entity.setEmail(dto.getEmail());
+        entity.setTelefone(dto.getTelefone());
+        entity.setCorretora(dto.getCorretora());
+
+        entity = repository.save(entity);
+
+        return new InvestidorDTO(entity);
+    }
 }
