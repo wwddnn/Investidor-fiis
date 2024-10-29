@@ -1,5 +1,6 @@
 package com.nicodemus.fiis.controllers;
 
+import java.net.URI;
 import java.util.Optional;
 
 import com.nicodemus.fiis.entities.Investidor;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.nicodemus.fiis.DTO.InvestidorDTO;
 import com.nicodemus.fiis.services.InvestidorService;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping(value = "/investidores")
@@ -37,12 +39,29 @@ public class InvestidorController {
     }
 
     @GetMapping
-    public Page<InvestidorDTO> findAll(Pageable pageable) {
-        return service.findAll(pageable);
+    public ResponseEntity<Page<InvestidorDTO>> findAll(Pageable pageable) {
+        Page<InvestidorDTO> dto = service.findAll(pageable);
+        return ResponseEntity.ok(dto);
     }
 
     @PostMapping
-    public InvestidorDTO insert(@RequestBody InvestidorDTO dto) {
-        return service.insert(dto);
+    public ResponseEntity<InvestidorDTO> insert(@RequestBody InvestidorDTO dto) {
+        dto = service.insert(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+        return ResponseEntity.created(uri).body(dto);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
