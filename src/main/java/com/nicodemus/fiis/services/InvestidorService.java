@@ -1,17 +1,15 @@
 package com.nicodemus.fiis.services;
 
-import java.util.Optional;
-
+import com.nicodemus.fiis.DTO.InvestidorDTO;
+import com.nicodemus.fiis.entities.Investidor;
+import com.nicodemus.fiis.repositories.InvestidorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nicodemus.fiis.DTO.InvestidorDTO;
-import com.nicodemus.fiis.entities.Investidor;
-import com.nicodemus.fiis.repositories.InvestidorRepository;
-import org.springframework.web.bind.annotation.RequestBody;
+import java.util.Optional;
 
 @Service
 public class InvestidorService {
@@ -19,8 +17,10 @@ public class InvestidorService {
     @Autowired
     private InvestidorRepository repository;
 
+    //this method find the Investor by id number.
     @Transactional(readOnly = true)
     public Optional<InvestidorDTO> findById(Long id) {
+
         Optional<Investidor> result = repository.findById(id);
 
         if (result.isPresent()) {
@@ -37,6 +37,7 @@ public class InvestidorService {
         return null;
     }
 
+    //this method find all Investors.
     @Transactional(readOnly = true)
     public Page<InvestidorDTO> findAll(Pageable pageable) {
         Page<Investidor> entity = repository.findAll(pageable);
@@ -44,9 +45,12 @@ public class InvestidorService {
         return entity.map(x -> new InvestidorDTO(x));
     }
 
+    //this method insert a new Investor.
     @Transactional
-    public InvestidorDTO insert(@RequestBody InvestidorDTO dto) {
+    public InvestidorDTO insert(InvestidorDTO dto) {
+
         Investidor entity = new Investidor();
+
         entity.setId(dto.getId());
         entity.setNome(dto.getNome());
         entity.setEmail(dto.getEmail());
@@ -57,6 +61,30 @@ public class InvestidorService {
 
         return new InvestidorDTO(entity);
     }
+
+    //this method update Investors in an idempotent way.
+    @Transactional
+    public InvestidorDTO update(Long id, InvestidorDTO dto) {
+
+        Investidor entity = repository.getReferenceById(id);
+
+        entity.setId(dto.getId());
+        entity.setNome(dto.getNome());
+        entity.setEmail(dto.getEmail());
+        entity.setTelefone(dto.getTelefone());
+        entity.setCorretora(dto.getCorretora());
+
+        entity = repository.save(entity);
+
+        return new InvestidorDTO(entity);
+    }
+
+    //this method delete Investors.
+    @Transactional
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
 }
 
 
