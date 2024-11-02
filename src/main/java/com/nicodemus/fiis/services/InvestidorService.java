@@ -3,28 +3,27 @@ package com.nicodemus.fiis.services;
 import com.nicodemus.fiis.DTO.InvestidorDTO;
 import com.nicodemus.fiis.entities.Investidor;
 import com.nicodemus.fiis.repositories.InvestidorRepository;
+import com.nicodemus.fiis.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 public class InvestidorService {
 
+    //Dependency
     @Autowired
     private InvestidorRepository repository;
 
-    //this method find the Investor by id number.
+    //FIND BY ID method: this method searches for the investors by their id number.
     @Transactional(readOnly = true)
-    public Optional<InvestidorDTO> findById(Long id) {
+    public InvestidorDTO findById(Long id) {
 
-        Optional<Investidor> result = repository.findById(id);
+        Investidor investidor = repository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Recurso não encontrado"));
 
-        if (result.isPresent()) {
-            Investidor investidor = result.get();
             InvestidorDTO dto = new InvestidorDTO();
             dto.setId(investidor.getId());
             dto.setNome(investidor.getNome());
@@ -32,12 +31,11 @@ public class InvestidorService {
             dto.setTelefone(investidor.getTelefone());
             dto.setCorretora(investidor.getCorretora());
 
-            return Optional.ofNullable(dto);
-        }
-        return null;
+            return new InvestidorDTO(investidor);
     }
 
-    //this method find all Investors.
+
+    //FIND ALL method: this method find for all Investors.
     @Transactional(readOnly = true)
     public Page<InvestidorDTO> findAll(Pageable pageable) {
         Page<Investidor> entity = repository.findAll(pageable);
@@ -45,7 +43,7 @@ public class InvestidorService {
         return entity.map(x -> new InvestidorDTO(x));
     }
 
-    //this method insert a new Investor.
+    //INSERT method: this method register a new Investor on database.
     @Transactional
     public InvestidorDTO insert(InvestidorDTO dto) {
 
@@ -62,7 +60,7 @@ public class InvestidorService {
         return new InvestidorDTO(entity);
     }
 
-    //this method update Investors in an idempotent way.
+    //UPDATE method: this method update Investors idempotently.
     @Transactional
     public InvestidorDTO update(Long id, InvestidorDTO dto) {
 
@@ -79,7 +77,7 @@ public class InvestidorService {
         return new InvestidorDTO(entity);
     }
 
-    //this method delete Investors.
+    //DELETE method: this method delete Investors from database.
     @Transactional
     public void delete(Long id) {
         repository.deleteById(id);

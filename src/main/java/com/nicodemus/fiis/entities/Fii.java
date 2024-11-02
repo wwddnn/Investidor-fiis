@@ -9,12 +9,14 @@ import java.util.List;
 @Table(name = "tb_fii")
 public class Fii {
 
+    //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String descricao;
 
+    //Relationships
     @ManyToMany(mappedBy = "fiis")
     private List<Investidor> investidores = new ArrayList<>();
 

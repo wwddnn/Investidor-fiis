@@ -9,14 +9,17 @@ import java.util.List;
 @Table(name = "tb_tipo")
 public class Tipo {
 
+    //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tipo;
 
+    //Relationship
     @OneToMany(mappedBy = "tipo")
     private List<Fii> fii = new ArrayList<>();
 
+    //Constructors
     public Tipo() {
     }
 
@@ -25,6 +28,7 @@ public class Tipo {
         this.tipo = tipo;
     }
 
+    //Get and Set methods
     public Long getId() {
         return id;
     }

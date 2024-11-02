@@ -4,12 +4,14 @@ import com.nicodemus.fiis.entities.Investidor;
 
 public class InvestidorDTO {
 
+    //Attributes
     private Long id;
     private String nome;
     private String email;
     private String telefone;
     private String corretora;
 
+    //Constructors
     public InvestidorDTO() {
     }
 
@@ -21,6 +23,7 @@ public class InvestidorDTO {
         this.corretora = corretora;
     }
 
+    //Entity Constructor
     public InvestidorDTO(Investidor entity) {
         id = entity.getId();
         nome = entity.getNome();
@@ -29,6 +32,7 @@ public class InvestidorDTO {
         corretora = entity.getCorretora();
     }
 
+    //Get and Set method
     public Long getId() {
         return id;
     }
