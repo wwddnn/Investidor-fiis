@@ -26,7 +26,7 @@ public class FiiService {
     //new**
     @Transactional(readOnly = true)
     public Fii getFii(Long id) {
-        Fii fii = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+        Fii fii = repository.findById(id).get();
         return fii;
     }
 

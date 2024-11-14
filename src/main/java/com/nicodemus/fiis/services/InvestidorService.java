@@ -38,7 +38,7 @@ public class InvestidorService {
     //new**
     @Transactional(readOnly = true)
     public Investidor addFiiToInvestidor(Long fiiId, Long investidorId) {
-        Investidor investidor = investidorRepository.getReferenceById(investidorId);
+        Investidor investidor = investidorRepository.findById(investidorId).get();
         Fii fii = fiiRepository.findById(fiiId).get();
         investidor.getFiis().add(fii);
         investidorRepository.save(investidor);
