@@ -9,7 +9,6 @@ import java.util.List;
 @Table(name = "tb_investidor")
 public class Investidor {
 
-    //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,14 +17,12 @@ public class Investidor {
     private String telefone;
     private String corretora;
 
-    //Relationship
     @ManyToMany
     @JoinTable(name = "tb_investidor_fii",
             joinColumns = @JoinColumn(name = "investidor_id"),
             inverseJoinColumns = @JoinColumn(name = "fii_id"))
     private List<Fii> fiis = new ArrayList<>();
 
-    //Constructors
     public Investidor() {
     }
 
@@ -37,7 +34,6 @@ public class Investidor {
         this.corretora = corretora;
     }
 
-    //Get and Set methods
     public Long getId() {
         return id;
     }

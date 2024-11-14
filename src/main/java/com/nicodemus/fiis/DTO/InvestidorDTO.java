@@ -1,14 +1,21 @@
 package com.nicodemus.fiis.DTO;
 
 import com.nicodemus.fiis.entities.Investidor;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class InvestidorDTO {
 
-    //Attributes
     private Long id;
+    @NotBlank(message = "Necessário um email válido")
+    @Size(min = 3, max = 60, message = "Ter entre 3 e 60 caracteres")
     private String nome;
+    @NotBlank(message = "Campo requerido")
+    @Email(message = "Necessário um email válido")
     private String email;
     private String telefone;
+    @NotBlank(message = "Campo requerido")
     private String corretora;
 
     //Constructors
@@ -23,7 +30,6 @@ public class InvestidorDTO {
         this.corretora = corretora;
     }
 
-    //Entity Constructor
     public InvestidorDTO(Investidor entity) {
         id = entity.getId();
         nome = entity.getNome();
@@ -32,7 +38,6 @@ public class InvestidorDTO {
         corretora = entity.getCorretora();
     }
 
-    //Get and Set method
     public Long getId() {
         return id;
     }
