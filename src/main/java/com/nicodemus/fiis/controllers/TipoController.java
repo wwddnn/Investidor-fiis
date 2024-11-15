@@ -1,7 +1,8 @@
 package com.nicodemus.fiis.controllers;
 
 import com.nicodemus.fiis.DTO.FiiDTO;
-import com.nicodemus.fiis.services.FiiService;
+import com.nicodemus.fiis.DTO.TipoDTO;
+import com.nicodemus.fiis.services.TipoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,26 +14,26 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/fiis")
-public class FiiController {
+@RequestMapping(value = "/tipos")
+public class TipoController {
 
     @Autowired
-    private FiiService service;
+    private TipoService service;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<FiiDTO> findById(@PathVariable Long id) {
-        FiiDTO dto = service.findById(id);
+    public ResponseEntity<TipoDTO> findById(@PathVariable Long id) {
+        TipoDTO dto = service.findById(id);
         return ResponseEntity.ok(dto);
     }
 
     @GetMapping
-    public ResponseEntity<Page<FiiDTO>> findAll(Pageable pageable) {
-        Page<FiiDTO> dto = service.findAll(pageable);
+    public ResponseEntity<Page<TipoDTO>> findAll(Pageable pageable) {
+        Page<TipoDTO> dto = service.findAll(pageable);
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping
-    public ResponseEntity<FiiDTO> insert(@Valid @RequestBody FiiDTO dto) {
+    public ResponseEntity<TipoDTO> insert(@Valid @RequestBody TipoDTO dto) {
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
                 buildAndExpand(dto.getId()).toUri();
@@ -40,8 +41,8 @@ public class FiiController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<FiiDTO> update(@PathVariable Long id, @Valid @RequestBody FiiDTO dto) {
-        FiiDTO result = service.update(id, dto);
+    public ResponseEntity<TipoDTO> update(@PathVariable Long id, @Valid @RequestBody TipoDTO dto) {
+        TipoDTO result = service.update(id, dto);
         return ResponseEntity.ok(result);
     }
 

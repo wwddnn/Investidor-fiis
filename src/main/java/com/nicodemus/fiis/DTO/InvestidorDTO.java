@@ -1,33 +1,22 @@
 package com.nicodemus.fiis.DTO;
 
 import com.nicodemus.fiis.entities.Investidor;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class InvestidorDTO {
 
     private Long id;
-    @NotBlank(message = "Necessário um email válido")
-    @Size(min = 3, max = 60, message = "Ter entre 3 e 60 caracteres")
     private String nome;
-    @NotBlank(message = "Campo requerido")
-    @Email(message = "Necessário um email válido")
     private String email;
     private String telefone;
-    @NotBlank(message = "Campo requerido")
     private String corretora;
 
-    //Constructors
-    public InvestidorDTO() {
-    }
+    private List<FiiDTO> fiis = new ArrayList<>();
 
-    public InvestidorDTO(Long id, String nome, String email, String telefone, String corretora) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.corretora = corretora;
+    public InvestidorDTO() {
     }
 
     public InvestidorDTO(Investidor entity) {
@@ -36,6 +25,8 @@ public class InvestidorDTO {
         email = entity.getEmail();
         telefone = entity.getTelefone();
         corretora = entity.getCorretora();
+        //essa linha traz do banco, os fiis que estao associados ao investidor
+        fiis = entity.getFiis().stream().map(x -> new FiiDTO(x)).collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -76,5 +67,9 @@ public class InvestidorDTO {
 
     public void setCorretora(String corretora) {
         this.corretora = corretora;
+    }
+
+    public List<FiiDTO> getFiis() {
+        return fiis;
     }
 }

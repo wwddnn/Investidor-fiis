@@ -1,10 +1,8 @@
 package com.nicodemus.fiis.services;
 
-import com.nicodemus.fiis.DTO.FiiDTO;
-import com.nicodemus.fiis.DTO.InvestidorDTO;
-import com.nicodemus.fiis.entities.Fii;
-import com.nicodemus.fiis.entities.Investidor;
-import com.nicodemus.fiis.repositories.FiiRepository;
+import com.nicodemus.fiis.DTO.TipoDTO;
+import com.nicodemus.fiis.entities.Tipo;
+import com.nicodemus.fiis.repositories.TipoRepository;
 import com.nicodemus.fiis.services.exceptions.DatabaseException;
 import com.nicodemus.fiis.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,47 +14,38 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class FiiService {
+public class TipoService {
 
     @Autowired
-    private FiiRepository repository;
+    private TipoRepository repository;
 
     @Transactional(readOnly = true)
-    public FiiDTO findById(Long id) {
-        Fii fii = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
-        FiiDTO dto = new FiiDTO(fii);
+    public TipoDTO findById(Long id) {
+        Tipo tipo = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+        TipoDTO dto = new TipoDTO(tipo);
         return dto;
     }
 
-    //new**
     @Transactional(readOnly = true)
-    public Fii getFii(Long id) {
-        Fii fii = repository.findById(id).get();
-        return fii;
-    }
-
-    @Transactional(readOnly = true)
-    public Page<FiiDTO> findAll(Pageable pageable) {
-        Page<Fii> entity = repository.findAll(pageable);
-        return entity.map(x -> new FiiDTO(x));
+    public Page<TipoDTO> findAll(Pageable pageable) {
+        Page<Tipo> entity = repository.findAll(pageable);
+        return entity.map(x -> new TipoDTO(x));
     }
 
     @Transactional
-    public FiiDTO insert(FiiDTO dto) {
-        Fii entity = new Fii();
-        entity.setNome(dto.getNome());
-        entity.setDescricao(dto.getDescricao());
+    public TipoDTO insert(TipoDTO dto) {
+        Tipo entity = new Tipo();
+        entity.setTipo(dto.getTipo());
         entity = repository.save(entity);
-        return new FiiDTO(entity);
+        return new TipoDTO(entity);
     }
 
     @Transactional
-    public FiiDTO update(Long id, FiiDTO dto) {
+    public TipoDTO update(Long id, TipoDTO dto) {
         try {
-            Fii entity = repository.getReferenceById(id);
-            entity.setNome(dto.getNome());
-            entity.setDescricao(dto.getDescricao());
-            return new FiiDTO(entity);
+            Tipo entity = repository.getReferenceById(id);
+            entity.setTipo(dto.getTipo());
+            return new TipoDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Recurso não encontrado");
         }
@@ -74,6 +63,7 @@ public class FiiService {
             throw new DatabaseException("Falha de integridade referencial");
         }
     }
+
 }
 
 

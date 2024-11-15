@@ -3,23 +3,22 @@ package com.nicodemus.fiis.entities;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_tipo")
 public class Tipo {
 
-    //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tipo;
 
-    //Relationship
     @OneToMany(mappedBy = "tipo")
-    private List<Fii> fii = new ArrayList<>();
+    private Set<Fii> fii = new HashSet<>();
 
-    //Constructors
     public Tipo() {
     }
 
@@ -28,7 +27,6 @@ public class Tipo {
         this.tipo = tipo;
     }
 
-    //Get and Set methods
     public Long getId() {
         return id;
     }
@@ -45,7 +43,7 @@ public class Tipo {
         this.tipo = tipo;
     }
 
-    public List<Fii> getFii() {
+    public Set<Fii> getFii() {
         return fii;
     }
 
