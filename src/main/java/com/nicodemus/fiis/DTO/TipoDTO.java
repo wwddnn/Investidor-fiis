@@ -2,8 +2,11 @@ package com.nicodemus.fiis.DTO;
 
 import com.nicodemus.fiis.entities.Tipo;
 
-public class TipoDTO {
+import java.io.Serializable;
 
+public class TipoDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private Long id;
     private String tipo;
 

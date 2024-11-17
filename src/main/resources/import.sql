@@ -37,8 +37,11 @@ INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('MCCI11', 'Fii que investe
 
 
 INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (1, 2);
+INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (1, 10);
 INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (2, 1);
+INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (2, 7);
 INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (3, 4);
+INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (3, 9);
 INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (4, 2);
 INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (4, 3);
 INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (5, 10);

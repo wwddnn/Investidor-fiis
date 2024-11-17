@@ -1,30 +1,27 @@
 package com.nicodemus.fiis.DTO;
 
-public class InvestidorMinDTO {
+import java.io.Serializable;
 
+public class InvestidorMinDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private Long id;
     private String nome;
     private String email;
-    private String telefone;
-    private String corretora;
 
     public InvestidorMinDTO() {
     }
 
-    public InvestidorMinDTO(Long id, String nome, String email, String telefone, String corretora) {
+    public InvestidorMinDTO(Long id, String nome, String email) {
         this.id = id;
         this.nome = nome;
         this.email = email;
-        this.telefone = telefone;
-        this.corretora = corretora;
     }
 
     public InvestidorMinDTO(InvestidorMinDTO entity) {
         id = entity.getId();
         nome = entity.getNome();
         email = entity.getEmail();
-        telefone = entity.getTelefone();
-        corretora = entity.getCorretora();
     }
 
     public Long getId() {
@@ -51,19 +48,4 @@ public class InvestidorMinDTO {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getCorretora() {
-        return corretora;
-    }
-
-    public void setCorretora(String corretora) {
-        this.corretora = corretora;
-    }
 }

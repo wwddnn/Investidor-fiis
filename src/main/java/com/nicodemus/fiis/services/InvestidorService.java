@@ -11,9 +11,12 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.stream.Collectors;
 
 @Service
 public class InvestidorService {
@@ -47,8 +50,9 @@ public class InvestidorService {
 
     @Transactional(readOnly = true)
     public Page<InvestidorDTO> findAll(Pageable pageable) {
-        Page<Investidor> entity = investidorRepository.findAll(pageable);
-        return entity.map(x -> new InvestidorDTO(x));
+        Page<Investidor> list = investidorRepository.findAll(pageable);
+        Page<InvestidorDTO> dto = list.map(x -> new InvestidorDTO(x));
+        return dto;
     }
 
     @Transactional
@@ -89,6 +93,8 @@ public class InvestidorService {
             throw new DatabaseException("Falha de integridade referencial");
         }
     }
+
+
 }
 
 

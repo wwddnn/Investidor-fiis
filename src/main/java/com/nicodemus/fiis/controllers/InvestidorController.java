@@ -1,11 +1,11 @@
 package com.nicodemus.fiis.controllers;
 
 import com.nicodemus.fiis.DTO.InvestidorDTO;
-import com.nicodemus.fiis.DTO.InvestidorMinDTO;
 import com.nicodemus.fiis.services.InvestidorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -58,6 +58,7 @@ public class InvestidorController {
         investidorService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
 
 }
 

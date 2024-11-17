@@ -14,7 +14,8 @@ public class InvestidorDTO {
     private String telefone;
     private String corretora;
 
-    private List<FiiDTO> fiis = new ArrayList<>();
+    //caso precise que vá ao banco de dados e traga os dados de associacao com a classe Fii
+    //private List<FiiDTO> fiis = new ArrayList<>();
 
     public InvestidorDTO() {
     }
@@ -26,7 +27,7 @@ public class InvestidorDTO {
         telefone = entity.getTelefone();
         corretora = entity.getCorretora();
         //essa linha traz do banco, os fiis que estao associados ao investidor
-        fiis = entity.getFiis().stream().map(x -> new FiiDTO(x)).collect(Collectors.toList());
+        //fiis = entity.getFiis().stream().map(x -> new FiiDTO(x)).collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -69,7 +70,7 @@ public class InvestidorDTO {
         this.corretora = corretora;
     }
 
-    public List<FiiDTO> getFiis() {
-        return fiis;
-    }
+//    public List<FiiDTO> getFiis() {
+//        return fiis;
+//    }
 }
