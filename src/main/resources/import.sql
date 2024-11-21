@@ -1,8 +1,13 @@
 
 INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Ana', 'ana@gmail.com', '21992224411', 'Clear');
+INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Andre', 'andre@gmail.com', '21992222222', 'XP');
+INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Aline', 'aline@gmail.com', '21992229999', 'Clear');
 INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Bruno', 'bruno@hotmail.com', '21974758889', 'XP');
+INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Breno', 'breno@hotmail.com', '21974752222', 'XP');
 INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Carla', 'carla@outlook.com', '11995552244', 'Rico');
+INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Carol', 'carol@outlook.com', '11995552222', 'XP');
 INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Dias', 'dias@msn.com', '21997788112', 'Clear');
+INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Deco', 'deco@msn.com', '21997788222', 'Rico');
 INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Ezequiel', 'eze@hotmail.com', '21988556644', 'NuInvest');
 INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Ferreira', 'ferreira@ig.com.br', '21977745321', 'XP');
 INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Gigi', 'gigi@uol.com.br', '21996883715', 'Clear');

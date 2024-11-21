@@ -11,18 +11,18 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.stream.Collectors;
+import java.util.List;
 
 @Service
 public class InvestidorService {
 
     @Autowired
     private InvestidorRepository investidorRepository;
+
     @Autowired
     private FiiRepository fiiRepository;
 
@@ -94,6 +94,12 @@ public class InvestidorService {
         }
     }
 
+    //query methods
+    @Transactional(readOnly = true)
+    public List<InvestidorDTO> findInvestidoresByName(String nome) {
+        List<InvestidorDTO> result = investidorRepository.findInvestidoresByName(nome);
+        return result;
+    }
 
 }
 
