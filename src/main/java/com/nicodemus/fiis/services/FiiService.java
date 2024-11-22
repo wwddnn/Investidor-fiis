@@ -15,15 +15,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class FiiService {
 
     @Autowired
-    private FiiRepository repository;
+    private FiiRepository fiiRepository;
 
     @Transactional(readOnly = true)
     public FiiDTO findById(Long id) {
-        Fii fii = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+        Fii fii = fiiRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
         FiiDTO dto = new FiiDTO(fii);
         return dto;
     }
@@ -31,13 +33,13 @@ public class FiiService {
     //new**
     @Transactional(readOnly = true)
     public Fii getFii(Long id) {
-        Fii fii = repository.findById(id).get();
+        Fii fii = fiiRepository.findById(id).get();
         return fii;
     }
 
     @Transactional(readOnly = true)
     public Page<FiiDTO> findAll(Pageable pageable) {
-        Page<Fii> entity = repository.findAll(pageable);
+        Page<Fii> entity = fiiRepository.findAll(pageable);
         return entity.map(x -> new FiiDTO(x));
     }
 
@@ -46,14 +48,14 @@ public class FiiService {
         Fii entity = new Fii();
         entity.setNome(dto.getNome());
         entity.setDescricao(dto.getDescricao());
-        entity = repository.save(entity);
+        entity = fiiRepository.save(entity);
         return new FiiDTO(entity);
     }
 
     @Transactional
     public FiiDTO update(Long id, FiiDTO dto) {
         try {
-            Fii entity = repository.getReferenceById(id);
+            Fii entity = fiiRepository.getReferenceById(id);
             entity.setNome(dto.getNome());
             entity.setDescricao(dto.getDescricao());
             return new FiiDTO(entity);
@@ -64,15 +66,21 @@ public class FiiService {
 
     @Transactional
     public void delete(Long id) {
-        if (!repository.existsById(id)) {
+        if (!fiiRepository.existsById(id)) {
             throw new ResourceNotFoundException("Recurso não encontrado");
         }
         try {
-            repository.deleteById(id);
+            fiiRepository.deleteById(id);
         }
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Falha de integridade referencial");
         }
+    }
+
+    @Transactional(readOnly = true)
+    public List<FiiDTO> findFiiByName(String nome) {
+        List<FiiDTO> result = fiiRepository.findFiiByName(nome);
+        return result;
     }
 }
 

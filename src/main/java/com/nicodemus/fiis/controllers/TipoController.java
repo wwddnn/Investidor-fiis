@@ -1,6 +1,7 @@
 package com.nicodemus.fiis.controllers;
 
 import com.nicodemus.fiis.DTO.FiiDTO;
+import com.nicodemus.fiis.DTO.InvestidorDTO;
 import com.nicodemus.fiis.DTO.TipoDTO;
 import com.nicodemus.fiis.services.TipoService;
 import jakarta.validation.Valid;
@@ -12,29 +13,30 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/tipos")
 public class TipoController {
 
     @Autowired
-    private TipoService service;
+    private TipoService tipoService;
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<TipoDTO> findById(@PathVariable Long id) {
-        TipoDTO dto = service.findById(id);
+        TipoDTO dto = tipoService.findById(id);
         return ResponseEntity.ok(dto);
     }
 
     @GetMapping
     public ResponseEntity<Page<TipoDTO>> findAll(Pageable pageable) {
-        Page<TipoDTO> dto = service.findAll(pageable);
+        Page<TipoDTO> dto = tipoService.findAll(pageable);
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping
     public ResponseEntity<TipoDTO> insert(@Valid @RequestBody TipoDTO dto) {
-        dto = service.insert(dto);
+        dto = tipoService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
                 buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
@@ -42,14 +44,21 @@ public class TipoController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<TipoDTO> update(@PathVariable Long id, @Valid @RequestBody TipoDTO dto) {
-        TipoDTO result = service.update(id, dto);
+        TipoDTO result = tipoService.update(id, dto);
         return ResponseEntity.ok(result);
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
+        tipoService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    //query methods. procura o tipo do fii pelo seu tipo
+    @GetMapping(value = "/tipos")
+    public ResponseEntity<List<TipoDTO>> findTipoByName(@RequestParam(name = "tipo", defaultValue = "") String tipo) {
+        List<TipoDTO> result = tipoService.findTipoByName(tipo);
+        return ResponseEntity.ok(result);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.nicodemus.fiis.services;
 
+import com.nicodemus.fiis.DTO.InvestidorDTO;
 import com.nicodemus.fiis.DTO.TipoDTO;
 import com.nicodemus.fiis.entities.Tipo;
 import com.nicodemus.fiis.repositories.TipoRepository;
@@ -13,22 +14,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class TipoService {
 
     @Autowired
-    private TipoRepository repository;
+    private TipoRepository tipoRepository;
 
     @Transactional(readOnly = true)
     public TipoDTO findById(Long id) {
-        Tipo tipo = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+        Tipo tipo = tipoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
         TipoDTO dto = new TipoDTO(tipo);
         return dto;
     }
 
     @Transactional(readOnly = true)
     public Page<TipoDTO> findAll(Pageable pageable) {
-        Page<Tipo> entity = repository.findAll(pageable);
+        Page<Tipo> entity = tipoRepository.findAll(pageable);
         return entity.map(x -> new TipoDTO(x));
     }
 
@@ -36,14 +39,14 @@ public class TipoService {
     public TipoDTO insert(TipoDTO dto) {
         Tipo entity = new Tipo();
         entity.setTipo(dto.getTipo());
-        entity = repository.save(entity);
+        entity = tipoRepository.save(entity);
         return new TipoDTO(entity);
     }
 
     @Transactional
     public TipoDTO update(Long id, TipoDTO dto) {
         try {
-            Tipo entity = repository.getReferenceById(id);
+            Tipo entity = tipoRepository.getReferenceById(id);
             entity.setTipo(dto.getTipo());
             return new TipoDTO(entity);
         } catch (EntityNotFoundException e) {
@@ -53,15 +56,22 @@ public class TipoService {
 
     @Transactional
     public void delete(Long id) {
-        if (!repository.existsById(id)) {
+        if (!tipoRepository.existsById(id)) {
             throw new ResourceNotFoundException("Recurso não encontrado");
         }
         try {
-            repository.deleteById(id);
+            tipoRepository.deleteById(id);
         }
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Falha de integridade referencial");
         }
+    }
+
+    //query methods
+    @Transactional(readOnly = true)
+    public List<TipoDTO> findTipoByName(String tipo) {
+        List<TipoDTO> result = tipoRepository.findTipoByName(tipo);
+        return result;
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface InvestidorRepository extends JpaRepository<Investidor, Long> {
 
-    //procra o investidor pelo nome, digitando a primeira letra do nome.
+    //procura o investidor pelo nome, digitando a primeira letra do nome.
     @Query("SELECT obj "
             + "FROM Investidor obj "
             + "WHERE UPPER(obj.nome) LIKE UPPER(CONCAT(:nome, '%')) ")
