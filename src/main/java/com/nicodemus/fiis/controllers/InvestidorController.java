@@ -1,5 +1,6 @@
 package com.nicodemus.fiis.controllers;
 
+import com.nicodemus.fiis.DTO.InvestidorCorretoraDTO;
 import com.nicodemus.fiis.DTO.InvestidorDTO;
 import com.nicodemus.fiis.services.InvestidorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,9 @@ public class InvestidorController {
     @PostMapping("/fii/{fiiId}/investidor/{investidorId}")
     public ResponseEntity<InvestidorDTO> addFiiToInvestidor(@PathVariable Long fiiId, @PathVariable Long investidorId) {
         InvestidorDTO investidor = investidorService.addFiiToInvestidor(fiiId, investidorId);
-        return ResponseEntity.ok(investidor);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(investidor.getId()).toUri();
+        return ResponseEntity.created(uri).body(investidor);
+       // return ResponseEntity.ok(investidor);
     }
 
     @PutMapping(value = "/{id}")
@@ -63,6 +66,13 @@ public class InvestidorController {
     public ResponseEntity<List<InvestidorDTO>> findInvestidoresByName(@RequestParam(name = "nome", defaultValue = "") String nome) {
         List<InvestidorDTO> result1 = investidorService.findInvestidoresByName(nome);
         return ResponseEntity.ok(result1);
+    }
+
+    //**new retorna a quantidade de corretoras que aparecem
+    @GetMapping(value = "/countCorretoras")
+    public ResponseEntity<List<InvestidorCorretoraDTO>> search1() {
+         List<InvestidorCorretoraDTO> result = investidorService.search1();
+         return ResponseEntity.ok(result);
     }
 
 }

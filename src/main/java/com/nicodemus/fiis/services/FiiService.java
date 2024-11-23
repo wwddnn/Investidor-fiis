@@ -31,11 +31,11 @@ public class FiiService {
     }
 
     //new**
-    @Transactional(readOnly = true)
-    public Fii getFii(Long id) {
-        Fii fii = fiiRepository.findById(id).get();
-        return fii;
-    }
+//    @Transactional(readOnly = true)
+//    public Fii getFii(Long id) {
+//        Fii fii = fiiRepository.findById(id).get();
+//        return fii;
+//    }
 
     @Transactional(readOnly = true)
     public Page<FiiDTO> findAll(Pageable pageable) {

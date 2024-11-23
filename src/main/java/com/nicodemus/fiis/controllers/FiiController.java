@@ -1,7 +1,6 @@
 package com.nicodemus.fiis.controllers;
 
 import com.nicodemus.fiis.DTO.FiiDTO;
-import com.nicodemus.fiis.DTO.InvestidorDTO;
 import com.nicodemus.fiis.services.FiiService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

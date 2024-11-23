@@ -12,7 +12,7 @@ public class Tipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String tipo;
+    private String nome;
 
     @OneToMany(mappedBy = "tipo")
     private Set<Fii> fii = new HashSet<>();
@@ -20,9 +20,9 @@ public class Tipo {
     public Tipo() {
     }
 
-    public Tipo(Long id, String tipo) {
+    public Tipo(Long id, String nome) {
         this.id = id;
-        this.tipo = tipo;
+        this.nome = nome;
     }
 
     public Long getId() {
@@ -33,12 +33,12 @@ public class Tipo {
         this.id = id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setNome(String tipo) {
+        this.nome = tipo;
     }
 
     public Set<Fii> getFii() {

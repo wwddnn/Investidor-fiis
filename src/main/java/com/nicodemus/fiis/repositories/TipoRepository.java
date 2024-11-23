@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface TipoRepository extends JpaRepository<Tipo, Long> {
 
-    //procura o tipo do fii pelo seu tipo, digitando a primeira letra.
+    //procura o tipo do fii pelo seu nome, digitando a primeira letra.
     @Query("SELECT obj "
-            + "FROM Tipo obj "
-            + "WHERE UPPER(obj.tipo) LIKE UPPER(CONCAT(:tipo, '%')) ")
-    List<TipoDTO> findTipoByName(String tipo);
+                + "FROM Tipo obj "
+                + "WHERE UPPER(obj.nome) LIKE UPPER(CONCAT(:nome, '%')) ")
+    List<TipoDTO> findTipoByName(String nome);
 
 }

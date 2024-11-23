@@ -1,5 +1,6 @@
 package com.nicodemus.fiis.services;
 
+import com.nicodemus.fiis.DTO.InvestidorCorretoraDTO;
 import com.nicodemus.fiis.DTO.InvestidorDTO;
 import com.nicodemus.fiis.entities.Fii;
 import com.nicodemus.fiis.entities.Investidor;
@@ -94,12 +95,20 @@ public class InvestidorService {
         }
     }
 
-    //query methods
+    //query methods. retorna o investidor de acordo com seu nome.
     @Transactional(readOnly = true)
     public List<InvestidorDTO> findInvestidoresByName(String nome) {
         List<InvestidorDTO> result = investidorRepository.findInvestidoresByName(nome);
         return result;
     }
+
+    //**new retorna a quantidade de corretoras que aparecem.
+    @Transactional(readOnly = true)
+    public List<InvestidorCorretoraDTO> search1() {
+        List<InvestidorCorretoraDTO> result = investidorRepository.search1();
+        return result;
+    }
+
 
 }
 

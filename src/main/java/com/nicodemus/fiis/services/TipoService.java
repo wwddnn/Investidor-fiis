@@ -1,6 +1,5 @@
 package com.nicodemus.fiis.services;
 
-import com.nicodemus.fiis.DTO.InvestidorDTO;
 import com.nicodemus.fiis.DTO.TipoDTO;
 import com.nicodemus.fiis.entities.Tipo;
 import com.nicodemus.fiis.repositories.TipoRepository;
@@ -38,7 +37,7 @@ public class TipoService {
     @Transactional
     public TipoDTO insert(TipoDTO dto) {
         Tipo entity = new Tipo();
-        entity.setTipo(dto.getTipo());
+        entity.setNome(dto.getNome());
         entity = tipoRepository.save(entity);
         return new TipoDTO(entity);
     }
@@ -47,7 +46,7 @@ public class TipoService {
     public TipoDTO update(Long id, TipoDTO dto) {
         try {
             Tipo entity = tipoRepository.getReferenceById(id);
-            entity.setTipo(dto.getTipo());
+            entity.setNome(dto.getNome());
             return new TipoDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Recurso não encontrado");
@@ -67,10 +66,10 @@ public class TipoService {
         }
     }
 
-    //query methods
+    //query methods**new
     @Transactional(readOnly = true)
-    public List<TipoDTO> findTipoByName(String tipo) {
-        List<TipoDTO> result = tipoRepository.findTipoByName(tipo);
+    public List<TipoDTO> findTipoByName(String nome) {
+        List<TipoDTO> result = tipoRepository.findTipoByName(nome);
         return result;
     }
 

@@ -23,12 +23,12 @@ INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Origami', 
 INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Patlin', 'patlin@hotmail.com', '21993383431', 'Genial');
 
 
-INSERT INTO tb_tipo (tipo) VALUES ('Logístico');
-INSERT INTO tb_tipo (tipo) VALUES ('Hedge Fund');
-INSERT INTO tb_tipo (tipo) VALUES ('CRI');
-INSERT INTO tb_tipo (tipo) VALUES ('Agro');
-INSERT INTO tb_tipo (tipo) VALUES ('Shopping');
-INSERT INTO tb_tipo (tipo) VALUES ('Fofis');
+INSERT INTO tb_tipo (nome) VALUES ('Logístico');
+INSERT INTO tb_tipo (nome) VALUES ('Hedge Fund');
+INSERT INTO tb_tipo (nome) VALUES ('CRI');
+INSERT INTO tb_tipo (nome) VALUES ('Agro');
+INSERT INTO tb_tipo (nome) VALUES ('Shopping');
+INSERT INTO tb_tipo (nome) VALUES ('Fofis');
 
 
 INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('XPLG11', 'Fii que investe em galpões logísticos', 1);

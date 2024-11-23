@@ -54,10 +54,10 @@ public class TipoController {
         return ResponseEntity.noContent().build();
     }
 
-    //query methods. procura o tipo do fii pelo seu tipo
-    @GetMapping(value = "/tipos")
-    public ResponseEntity<List<TipoDTO>> findTipoByName(@RequestParam(name = "tipo", defaultValue = "") String tipo) {
-        List<TipoDTO> result = tipoService.findTipoByName(tipo);
+    //query methods. procura o tipo do fii pelo seu tipo **new
+    @GetMapping(value = "/nomes")
+    public ResponseEntity<List<TipoDTO>> findTipoByName(@RequestParam(name = "nome", defaultValue = "") String nome) {
+        List<TipoDTO> result = tipoService.findTipoByName(nome);
         return ResponseEntity.ok(result);
     }
 

@@ -8,16 +8,16 @@ public class TipoDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long id;
-    private String tipo;
+    private String nome;
 
     public TipoDTO(Long id, String tipo) {
         this.id = id;
-        this.tipo = tipo;
+        this.nome = tipo;
     }
 
     public TipoDTO(Tipo entity) {
         id = entity.getId();
-        tipo = entity.getTipo();
+        nome = entity.getNome();
     }
 
     public Long getId() {
@@ -28,11 +28,11 @@ public class TipoDTO implements Serializable {
         this.id = id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setNome(String tipo) {
+        this.nome = tipo;
     }
 }
