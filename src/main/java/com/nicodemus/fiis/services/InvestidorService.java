@@ -57,7 +57,7 @@ public class InvestidorService {
     }
 
     @Transactional
-    public InvestidorDTO insert(InvestidorDTO dto) {
+    public InvestidorDTO insert(InvestidorDTO dto) { //metodo para inserir um investidor novo
         Investidor entity = new Investidor();
         entity.setNome(dto.getNome());
         entity.setEmail(dto.getEmail());
@@ -95,14 +95,14 @@ public class InvestidorService {
         }
     }
 
-    //query methods. retorna o investidor de acordo com seu nome.
+    //query methods. retorna o investidor de acordo com seu nome
     @Transactional(readOnly = true)
     public List<InvestidorDTO> findInvestidoresByName(String nome) {
         List<InvestidorDTO> result = investidorRepository.findInvestidoresByName(nome);
         return result;
     }
 
-    //**new retorna a quantidade de corretoras que aparecem.
+    //**new retorna a quantidade de corretoras que aparecem
     @Transactional(readOnly = true)
     public List<InvestidorCorretoraDTO> search1() {
         List<InvestidorCorretoraDTO> result = investidorRepository.search1();

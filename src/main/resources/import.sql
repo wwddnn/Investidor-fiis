@@ -21,6 +21,7 @@ INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Nerdin', '
 INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Ophra', 'ophra@gmail.com.br', '21993383457', 'Rico');
 INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Origami', 'origami@terra.com.br', '21993383499', 'Toro');
 INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Patlin', 'patlin@hotmail.com', '21993383431', 'Genial');
+INSERT INTO tb_investidor (nome, email, telefone, corretora) VALUES ('Querubim', 'querubim@hotmail.com', '21993383499', 'Clear');
 
 
 INSERT INTO tb_tipo (nome) VALUES ('Logístico');
@@ -29,6 +30,7 @@ INSERT INTO tb_tipo (nome) VALUES ('CRI');
 INSERT INTO tb_tipo (nome) VALUES ('Agro');
 INSERT INTO tb_tipo (nome) VALUES ('Shopping');
 INSERT INTO tb_tipo (nome) VALUES ('Fofis');
+INSERT INTO tb_tipo (nome) VALUES ('Desenvolvimento');
 
 
 INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('XPLG11', 'Fii que investe em galpões logísticos', 1);
@@ -39,11 +41,12 @@ INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('RECR11', 'Fii que investe
 INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('XPML11', 'Fii que investe shoppings centers', 5);
 INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('BCFF11', 'Fii que investe outros Fiis', 6);
 INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('BTLG11', 'Fii que investe galpões logísticos', 1);
-INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('RECR11', 'Fii que investe em CRIs', 3);
+INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('SNCI11', 'Fii que investe em CRIs', 3);
 INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('MCCI11', 'Fii que investe em CRIs', 3);
 INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('SNFZ11', 'Fii que investe em Agro', 4);
 INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('BRCO11', 'Fii que investe em galpões logísticos', 1);
 INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('MXRF11', 'Fii que investe em galpões logísticos', 3);
+INSERT INTO tb_fii (nome, descricao, tipo_id) VALUES ('TGAR11', 'Fii de desenvolvimento', 7);
 
 
 
@@ -89,6 +92,7 @@ INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (22, 8);
 INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (22, 13);
 INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (23, 3);
 INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (23, 5);
+INSERT INTO tb_investidor_fii (investidor_id, fii_id) VALUES (24, 7);
 
 
 

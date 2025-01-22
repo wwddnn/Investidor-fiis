@@ -1,10 +1,11 @@
 package com.nicodemus.fiis.services;
 
 import com.nicodemus.fiis.DTO.FiiDTO;
-import com.nicodemus.fiis.DTO.InvestidorDTO;
+import com.nicodemus.fiis.DTO.FiisimpleDTO;
 import com.nicodemus.fiis.entities.Fii;
-import com.nicodemus.fiis.entities.Investidor;
+import com.nicodemus.fiis.entities.Tipo;
 import com.nicodemus.fiis.repositories.FiiRepository;
+import com.nicodemus.fiis.repositories.TipoRepository;
 import com.nicodemus.fiis.services.exceptions.DatabaseException;
 import com.nicodemus.fiis.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
@@ -23,10 +24,13 @@ public class FiiService {
     @Autowired
     private FiiRepository fiiRepository;
 
+    @Autowired
+    private TipoRepository tipoRepository;
+
     @Transactional(readOnly = true)
     public FiiDTO findById(Long id) {
-        Fii fii = fiiRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
-        FiiDTO dto = new FiiDTO(fii);
+        Fii entity = fiiRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+        FiiDTO dto = new FiiDTO(entity);
         return dto;
     }
 
@@ -38,17 +42,25 @@ public class FiiService {
 //    }
 
     @Transactional(readOnly = true)
-    public Page<FiiDTO> findAll(Pageable pageable) {
+    public Page<FiisimpleDTO> findAll(Pageable pageable) {
         Page<Fii> entity = fiiRepository.findAll(pageable);
-        return entity.map(x -> new FiiDTO(x));
+        return entity.map(x -> new FiisimpleDTO(x));
     }
 
     @Transactional
-    public FiiDTO insert(FiiDTO dto) {
+    public FiiDTO insert(FiiDTO dto) { //esse metodo insere um novo fii no banco de dados, e tambem seu tipo aninhado
         Fii entity = new Fii();
-        entity.setNome(dto.getNome());
+        entity.setNome(dto.getNome()); //nao inserimos o id, pq é inserido automaticamente no post
         entity.setDescricao(dto.getDescricao());
+
+        Tipo tipo = tipoRepository.getReferenceById(dto.getTipoDto().getId()); //busco no banco o tipo que ja existe com base no id que vem do dto
+        //Tipo tipo = new Tipo(); //crio uma entidade tipo no banco de dados //esta aninhada ao Fii
+        //tipo.setId(dto.getTipoDto().getId());
+
+        entity.setTipo(tipo); //vou setar na minha entidade, o tipo que esta aninhado
+
         entity = fiiRepository.save(entity);
+
         return new FiiDTO(entity);
     }
 

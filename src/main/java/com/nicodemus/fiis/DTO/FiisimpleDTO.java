@@ -2,25 +2,22 @@ package com.nicodemus.fiis.DTO;
 
 import com.nicodemus.fiis.entities.Fii;
 
-public class FiiDTO { //esse dto retorna tanto o fii quanto seu tipo aninhado junto a ele
+public class FiisimpleDTO { //esse dto retorna somente os dados do fii, sem aninhamento com o tipo
 
     private Long id;
     private String nome;
     private String descricao;
 
-    private TipoDTO tipoDto; //pega do TipoDTO que esta aninhado
-
-    public FiiDTO(Long id, String nome, String descricao) {
+    public FiisimpleDTO(Long id, String nome, String descricao) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
     }
 
-    public FiiDTO(Fii entity) { //construtor da entidade //passa os dados da entidade para o dto //ja consta o tipoDto que esta aninhado passando o tipo
+    public FiisimpleDTO(Fii entity) { //construtor da entidade //passa os dados da entidade para o dto
         id = entity.getId();
         nome = entity.getNome();
         descricao = entity.getDescricao();
-        tipoDto = new TipoDTO(entity.getTipo()); //copiei para o dto os dados do Tipo que esta dentro da entidade
     }
 
     public Long getId() {
@@ -47,7 +44,4 @@ public class FiiDTO { //esse dto retorna tanto o fii quanto seu tipo aninhado ju
         this.descricao = descricao;
     }
 
-    public TipoDTO getTipoDto() {
-        return tipoDto;
-    }
 }

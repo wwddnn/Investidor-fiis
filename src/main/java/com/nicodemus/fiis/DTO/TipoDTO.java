@@ -2,11 +2,8 @@ package com.nicodemus.fiis.DTO;
 
 import com.nicodemus.fiis.entities.Tipo;
 
-import java.io.Serializable;
+public class TipoDTO{
 
-public class TipoDTO implements Serializable {
-
-    private static final long serialVersionUID = 1L;
     private Long id;
     private String nome;
 
@@ -15,7 +12,7 @@ public class TipoDTO implements Serializable {
         this.nome = tipo;
     }
 
-    public TipoDTO(Tipo entity) {
+    public TipoDTO(Tipo entity) { //construtor da entidade //passa os dados da entidade para o dto
         id = entity.getId();
         nome = entity.getNome();
     }

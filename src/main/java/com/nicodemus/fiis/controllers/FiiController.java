@@ -1,6 +1,7 @@
 package com.nicodemus.fiis.controllers;
 
 import com.nicodemus.fiis.DTO.FiiDTO;
+import com.nicodemus.fiis.DTO.FiisimpleDTO;
 import com.nicodemus.fiis.services.FiiService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,13 @@ public class FiiController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<FiiDTO>> findAll(Pageable pageable) {
-        Page<FiiDTO> dto = fiiService.findAll(pageable);
+    public ResponseEntity<Page<FiisimpleDTO>> findAll(Pageable pageable) {
+        Page<FiisimpleDTO> dto = fiiService.findAll(pageable);
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping
-    public ResponseEntity<FiiDTO> insert(@Valid @RequestBody FiiDTO dto) {
+    public ResponseEntity<FiiDTO> insert(@RequestBody FiiDTO dto) {
         dto = fiiService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
                 buildAndExpand(dto.getId()).toUri();
